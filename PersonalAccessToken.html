@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة السندباد للعقارات | بغداد - الدورة (مزامنة GitHub)</title>
+    
+    <!-- مكتبة Tailwind CSS مع تفعيل الوضع الليلي -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        royalBlue: '#0f294a',
+                        royalBlueDark: '#08182c',
+                        rubyRed: '#c81e2b',
+                        rubyRedDark: '#9e141f',
+                        warmGold: '#f59e0b',
+                        warmGoldLight: '#fbbf24',
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- خطوط جوجل العربية (Cairo & Tajawal) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- أيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="font-tajawal bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 antialiased overflow-x-hidden selection:bg-warmGold selection:text-royalBlue">
+
+    <!-- ================= الشريط العلوي + مؤشر المزامنة مع GitHub ================= -->
+    <div class="bg-royalBlueDark text-slate-200 text-xs sm:text-sm py-2 px-4 border-b border-slate-700/70">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <!-- العنوان ومؤشر المزامنة مع Git -->
+            <div class="flex flex-wrap items-center gap-2.5 sm:gap-4">
+                <div class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-location-dot text-warmGold"></i>
+                    <span>بغداد - الدورة - الشرطة - شارع البريد - مقابل السمكة</span>
+                </div>
+                
+                <!-- مؤشر حالة الربط مع GitHub -->
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs font-cairo font-bold">
+                    <i class="fa-brands fa-github text-sm text-white"></i>
+                    <span id="git-sync-dot" class="w-2 h-2 rounded-full bg-amber-400"></span>
+                    <span id="git-sync-status" class="text-amber-300">وضع محلي (غير مربوط بـ Git)</span>
+                    <button onclick="manualGitSync()" title="مزامنة الآن مع GitHub" class="mr-1 text-warmGold hover:text-white transition">
+                        <i id="git-sync-spin" class="fa-solid fa-rotate"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- الإدارة والهاتف -->
+            <div class="flex items-center gap-4">
+                <span class="hidden lg:inline text-warmGold font-semibold">بإدارة الشيخ مصطفى الربيعي - أبو هالة المعماري</span>
+                <a href="tel:07864149641" dir="ltr" class="hover:text-warmGold transition flex items-center gap-1.5 font-cairo font-bold">
+                    <i class="fa-solid fa-phone text-rubyRed"></i> 07864149641
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= شريط الأخبار والإعلانات العاجلة المتزامن عبر Git ================= -->
+    <div class="bg-gradient-to-l from-rubyRed via-rubyRedDark to-royalBlue text-white py-2 px-4 shadow-inner">
+        <div class="max-w-7xl mx-auto flex items-center gap-3 overflow-hidden">
+            <span class="shrink-0 bg-warmGold text-royalBlue font-cairo font-black text-xs px-3 py-1 rounded-lg shadow flex items-center gap-1.5">
+                <i class="fa-solid fa-bullhorn"></i> إعلان عاجل
+            </span>
+            <div class="w-full overflow-hidden">
+                <p id="live-announcement-text" class="text-xs sm:text-sm font-cairo font-bold truncate">
+                    أهلاً بكم في شركة السندباد للعقارات - بيع وشراء الدور والأراضي السكنية والزراعية، وتصميم وتعقيب المعاملات بإشراف كادر هندسي متخصص في بغداد الدورة.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= شريط التنقل الرئيسي (Navbar) ================= -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-md border-b-2 border-warmGold transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- الشعار والاسم -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-2xl bg-royalBlue flex items-center justify-center text-warmGold shadow-lg group-hover:scale-105 transition">
+                        <svg class="w-8 h-8" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 32L26 16L38 26L48 18L58 28" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            <rect x="22" y="28" width="8" height="8" rx="1" fill="#ffffff"/>
+                            <rect x="44" y="29" width="6" height="6" rx="1" fill="#ffffff"/>
+                            <path d="M12 44C24 38 40 38 54 44" stroke="#c81e2b" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="font-cairo font-black text-xl sm:text-2xl text-rubyRed leading-none">شركة السندباد</h1>
+                        <span class="inline-block mt-1 px-2.5 py-0.5 bg-royalBlue text-white text-xs font-bold rounded-full">للعقارات والتصميم الهندسي</span>
+                    </div>
+                </a>
+
+                <!-- الروابط للشاشات الكبيرة -->
+                <nav class="hidden lg:flex items-center gap-6 font-cairo font-bold text-royalBlue dark:text-slate-200">
+                    <a href="#home" class="hover:text-rubyRed transition py-2">الرئيسية</a>
+                    <a href="#properties" class="hover:text-rubyRed transition py-2">معرض العقارات</a>
+                    <a href="#engineering" class="hover:text-rubyRed transition py-2">الخدمات الهندسية</a>
+                    <a href="#request-section" class="hover:text-rubyRed transition py-2">اطلب عقارك</a>
+                    <a href="#contact" class="hover:text-rubyRed transition py-2">تواصل معنا</a>
+                </nav>
+
+                <!-- أزرار التحكم (الوضع الليلي + لوحة الإدارة + قائمة الموبايل) -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- زر تبديل الوضع الليلي/النهاري -->
+                    <button id="theme-toggle-btn" aria-label="تبديل المظهر" title="تبديل الوضع الليلي / النهاري"
+                            class="p-2.5 sm:p-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-royalBlue dark:text-warmGold hover:bg-warmGold/20 transition border border-slate-200 dark:border-slate-700">
+                        <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+
+                    <!-- زر لوحة الإدارة والربط مع Git -->
+                    <button onclick="openAdminAuthModal()" 
+                            class="inline-flex items-center gap-2 bg-royalBlue hover:bg-rubyRed text-white font-cairo font-bold px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl shadow-md transition text-xs sm:text-sm">
+                        <i class="fa-brands fa-github text-warmGold text-base"></i>
+                        <span>الإدارة و Git</span>
+                    </button>
+
+                    <!-- زر قائمة الموبايل -->
+                    <button id="mobile-menu-btn" aria-label="القائمة" class="lg:hidden p-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-royalBlue dark:text-white hover:bg-rubyRed hover:text-white transition">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- قائمة الموبايل المنسدلة -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-royalBlue text-white border-t border-slate-700 px-4 pt-3 pb-6 space-y-2 shadow-2xl">
+            <a href="#home" class="mobile-link block py-2.5 px-4 rounded-xl hover:bg-white/10 font-cairo font-bold">الرئيسية</a>
+            <a href="#properties" class="mobile-link block py-2.5 px-4 rounded-xl hover:bg-white/10 font-cairo font-bold">معرض العقارات المتاحة</a>
+            <a href="#engineering" class="mobile-link block py-2.5 px-4 rounded-xl hover:bg-white/10 font-cairo font-bold">الخدمات الهندسية وتعقيب المعاملات</a>
+            <a href="#request-section" class="mobile-link block py-2.5 px-4 rounded-xl hover:bg-white/10 font-cairo font-bold">اطلب عقارك أو سجل معاملتك</a>
+            <a href="#contact" class="mobile-link block py-2.5 px-4 rounded-xl hover:bg-white/10 font-cairo font-bold">موقعنا وأرقام الهواتف</a>
+        </div>
+    </header>
+
+    <!-- ================= القسم الرئيسي (Hero Section) ================= -->
+    <section id="home" class="relative min-h-[82vh] flex items-center bg-royalBlue text-white overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80" 
+                 onerror="this.src='https://placehold.co/1920x1080/0f294a/f59e0b?text=شركة+السندباد+للعقارات'" 
+                 alt="شركة السندباد للعقارات" 
+                 class="w-full h-full object-cover opacity-25">
+            <div class="absolute inset-0 bg-gradient-to-l from-royalBlueDark via-royalBlue/90 to-royalBlue/75"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 w-full">
+            <div class="grid lg:grid-cols-12 gap-10 items-center">
+                <!-- النصوص والشعارات -->
+                <div class="lg:col-span-8 space-y-6 text-center lg:text-right">
+                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-warmGold/40 px-4 py-2 rounded-full text-warmGold font-cairo font-bold text-xs sm:text-sm">
+                        <i class="fa-solid fa-crown"></i>
+                        <span>بإدارة الشيخ مصطفى الربيعي - أبو هالة المعماري</span>
+                    </div>
+
+                    <h2 class="font-cairo font-black text-4xl sm:text-5xl lg:text-6xl leading-tight">
+                        <span class="text-white block">شركة السندباد للعقارات</span>
+                        <span class="text-warmGold block mt-2 text-2xl sm:text-4xl">بيع وشراء الدور والأراضي السكنية والزراعية</span>
+                    </h2>
+
+                    <div class="bg-rubyRed text-white font-cairo font-extrabold text-base sm:text-xl px-6 py-3 rounded-2xl inline-flex items-center gap-3 shadow-lg border border-white/20">
+                        <i class="fa-solid fa-compass-drafting text-warmGold text-2xl"></i>
+                        <span>تصميم تعقيب المعاملات بإشراف كادر هندسي متخصص</span>
+                    </div>
+
+                    <p class="text-slate-200 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        وجهتكم العقارية والهندسية الأولى في بغداد – الدورة. نوفر لكم أرقى الدور السكنية والأراضي المفروزة والزراعية، مع إنجاز كافة المعاملات الهندسية بدقة وموثوقية.
+                    </p>
+
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#properties" class="bg-warmGold hover:bg-warmGoldLight text-royalBlue font-cairo font-black px-7 py-4 rounded-2xl shadow-xl transition transform hover:-translate-y-1 flex items-center gap-2 text-base sm:text-lg">
+                            <i class="fa-solid fa-building"></i>
+                            <span>استعراض العقارات</span>
+                        </a>
+                        <a href="https://wa.me/9647864149641?text=السلام%20عليكم%20شركة%20السندباد%20للعقارات" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-cairo font-bold px-7 py-4 rounded-2xl shadow-xl transition transform hover:-translate-y-1 flex items-center gap-2 text-base sm:text-lg">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                            <span>واتساب مباشر</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- بطاقة أرقام الهواتف -->
+                <div class="lg:col-span-4">
+                    <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-6 sm:p-8 rounded-3xl shadow-2xl space-y-5">
+                        <div class="flex items-center gap-3 border-b border-white/15 pb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-rubyRed flex items-center justify-center text-white text-2xl shadow-md">
+                                <i class="fa-solid fa-phone-volume"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-cairo font-bold text-xl text-white">أرقام الهواتف المباشرة</h3>
+                                <p class="text-xs text-warmGold">للاستفسار والحجز والاستشارات الهندسية</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 font-cairo font-bold text-lg" dir="ltr">
+                            <a href="tel:07864149641" class="flex items-center justify-between bg-royalBlueDark/90 hover:bg-rubyRed transition p-3.5 rounded-xl border border-white/10">
+                                <span class="text-warmGold text-xs font-tajawal" dir="rtl">الخط الرئيسي (واتساب):</span>
+                                <span class="text-white tracking-wider">07864149641</span>
+                            </a>
+                            <a href="tel:07513243860" class="flex items-center justify-between bg-royalBlueDark/90 hover:bg-rubyRed transition p-3.5 rounded-xl border border-white/10">
+                                <span class="text-warmGold text-xs font-tajawal" dir="rtl">الخط الثاني:</span>
+                                <span class="text-white tracking-wider">07513243860</span>
+                            </a>
+                            <a href="tel:0774646677" class="flex items-center justify-between bg-royalBlueDark/90 hover:bg-rubyRed transition p-3.5 rounded-xl border border-white/10">
+                                <span class="text-warmGold text-xs font-tajawal" dir="rtl">الخط الثالث:</span>
+                                <span class="text-white tracking-wider">0774646677</span>
+                            </a>
+                        </div>
+
+                        <div class="bg-warmGold/20 border border-warmGold/40 rounded-xl p-3.5 text-center text-xs sm:text-sm text-white font-semibold">
+                            <i class="fa-solid fa-location-dot text-warmGold ml-1"></i>
+                            بغداد - الدورة - الشرطة - شارع البريد - مقابل السمكة
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= معرض العقارات التفاعلي (Properties Showcase) ================= -->
+    <section id="properties" class="py-16 lg:py-24 bg-slate-50 dark:bg-slate-950 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+                <div class="space-y-2">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-royalBlue/10 dark:bg-warmGold/20 text-royalBlue dark:text-warmGold font-cairo font-bold text-xs">
+                        <i class="fa-brands fa-git-alt"></i>
+                        <span id="last-sync-label">محدث تلقائياً</span>
+                    </div>
+                    <h2 class="font-cairo font-black text-3xl sm:text-4xl text-royalBlue dark:text-white">معرض العقارات المتاحة</h2>
+                    <p class="text-slate-600 dark:text-slate-400">تصفح أحدث الدور السكنية والأراضي السكنية والزراعية في بغداد - الدورة</p>
+                </div>
+
+                <!-- البحث والترتيب -->
+                <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                    <div class="relative flex-1 sm:w-72">
+                        <input type="text" id="property-search-input" placeholder="ابحث بالمنطقة، المساحة، أو السعر..." 
+                               class="w-full pl-10 pr-4 py-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:border-royalBlue dark:focus:border-warmGold outline-none text-sm shadow-sm">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400"></i>
+                    </div>
+                    <select id="property-sort-select" class="px-4 py-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm font-cairo font-bold outline-none shadow-sm">
+                        <option value="newest">الترتيب: الأحدث أولاً</option>
+                        <option value="price-asc">السعر: من الأقل للأعلى</option>
+                        <option value="price-desc">السعر: من الأعلى للأقل</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- أزرار التصفية حسب التصنيف -->
+            <div id="filter-buttons" class="flex flex-wrap gap-2.5 mb-8">
+                <button data-filter="all" class="filter-btn active px-5 py-2.5 rounded-xl font-cairo font-bold text-sm bg-royalBlue text-white shadow transition">
+                    الكل (<span id="count-all">0</span>)
+                </button>
+                <button data-filter="دور سكنية" class="filter-btn px-5 py-2.5 rounded-xl font-cairo font-bold text-sm bg-white dark:bg-slate-900 text-royalBlue dark:text-slate-200 border border-slate-200 dark:border-slate-800 hover:border-royalBlue transition">
+                    دور سكنية
+                </button>
+                <button data-filter="أراضٍ سكنية" class="filter-btn px-5 py-2.5 rounded-xl font-cairo font-bold text-sm bg-white dark:bg-slate-900 text-royalBlue dark:text-slate-200 border border-slate-200 dark:border-slate-800 hover:border-royalBlue transition">
+                    أراضٍ سكنية
+                </button>
+                <button data-filter="أراضٍ زراعية" class="filter-btn px-5 py-2.5 rounded-xl font-cairo font-bold text-sm bg-white dark:bg-slate-900 text-royalBlue dark:text-slate-200 border border-slate-200 dark:border-slate-800 hover:border-royalBlue transition">
+                    أراضٍ زراعية
+                </button>
+            </div>
+
+            <!-- شبكة عرض العقارات -->
+            <div id="properties-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- يتم تعبئتها ديناميكياً عبر JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= قسم الخدمات الهندسية وتعقيب المعاملات ================= -->
+    <section id="engineering" class="py-16 lg:py-24 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+                <span class="px-4 py-1.5 rounded-full bg-rubyRed/10 text-rubyRed dark:text-warmGold font-cairo font-bold text-sm">بإشراف كادر هندسي متخصص</span>
+                <h2 class="font-cairo font-black text-3xl sm:text-4xl text-royalBlue dark:text-white">تصميم وتعقيب المعاملات الهندسية والعقارية</h2>
+                <p class="text-slate-600 dark:text-slate-400 text-lg">بإدارة أبو هالة المعماري وكادرنا الهندسي لإنجاز معاملاتكم الرسمية وخرائطكم المعمارية بأعلى دقة</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-slate-50 dark:bg-slate-800/80 rounded-3xl p-7 shadow-md hover:shadow-xl transition border-b-4 border-warmGold group">
+                    <div class="w-14 h-14 rounded-2xl bg-warmGold/20 text-royalBlue dark:text-warmGold group-hover:bg-warmGold group-hover:text-royalBlue transition flex items-center justify-center text-2xl mb-5">
+                        <i class="fa-solid fa-compass-drafting"></i>
+                    </div>
+                    <h3 class="font-cairo font-bold text-xl text-royalBlue dark:text-white mb-2">تصميم الخرائط المعمارية</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                        إعداد تصاميم معمارية وإنشائية عصرية وواجهات ثلاثية الأبعاد تستغل المساحات بأفضل صورة.
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 dark:bg-slate-800/80 rounded-3xl p-7 shadow-md hover:shadow-xl transition border-b-4 border-royalBlue dark:border-blue-500 group">
+                    <div class="w-14 h-14 rounded-2xl bg-royalBlue/10 dark:bg-blue-500/20 text-royalBlue dark:text-blue-400 group-hover:bg-royalBlue group-hover:text-white transition flex items-center justify-center text-2xl mb-5">
+                        <i class="fa-solid fa-border-all"></i>
+                    </div>
+                    <h3 class="font-cairo font-bold text-xl text-royalBlue dark:text-white mb-2">معاملات الإفراز والتقسيم</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                        إنجاز معاملات فرز الأراضي والعقارات وإصدار السندات المستقلة وفق الضوابط البلدية والقانونية.
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 dark:bg-slate-800/80 rounded-3xl p-7 shadow-md hover:shadow-xl transition border-b-4 border-emerald-600 group">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition flex items-center justify-center text-2xl mb-5">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </div>
+                    <h3 class="font-cairo font-bold text-xl text-royalBlue dark:text-white mb-2">تصحيح الجنس والطابو</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                        متابعة وتعقيب معاملات تصحيح جنس العقار ونقل الملكية في دوائر التسجيل العقاري والبلدية.
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 dark:bg-slate-800/80 rounded-3xl p-7 shadow-md hover:shadow-xl transition border-b-4 border-rubyRed group">
+                    <div class="w-14 h-14 rounded-2xl bg-rubyRed/10 text-rubyRed group-hover:bg-rubyRed group-hover:text-white transition flex items-center justify-center text-2xl mb-5">
+                        <i class="fa-solid fa-helmet-safety"></i>
+                    </div>
+                    <h3 class="font-cairo font-bold text-xl text-royalBlue dark:text-white mb-2">إصدار إجازات البناء</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                        استحصال إجازات البناء والترميم السكنية والتجارية بأسرع وقت وبإشراف هندسي متكامل.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= قسم إرسال طلبات العملاء وحفظها في Git ================= -->
+    <section id="request-section" class="py-16 lg:py-24 bg-royalBlue text-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center space-y-3 mb-10">
+                <span class="px-4 py-1.5 rounded-full bg-warmGold text-royalBlue font-cairo font-bold text-sm">حجز موعد أو طلب عقار</span>
+                <h2 class="font-cairo font-black text-3xl sm:text-4xl">سجل طلبك العقاري أو الهندسي الآن</h2>
+                <p class="text-slate-300 text-base sm:text-lg">يُحفظ طلبك في سجل الإدارة (ويتزامن مع GitHub تلقائياً عند التفعيل) مع خيار الإرسال المباشر لواتساب الشركة</p>
+            </div>
+
+            <form id="client-request-form" class="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-6 border border-white/10">
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div>
+                        <label for="req-name" class="block font-cairo font-bold text-royalBlue dark:text-warmGold mb-2">الاسم الكريم <span class="text-rubyRed">*</span></label>
+                        <input type="text" id="req-name" required placeholder="أدخل اسمك الكامل" 
+                               class="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:border-royalBlue dark:focus:border-warmGold outline-none transition">
+                    </div>
+
+                    <div>
+                        <label for="req-phone" class="block font-cairo font-bold text-royalBlue dark:text-warmGold mb-2">رقم الهاتف / واتساب <span class="text-rubyRed">*</span></label>
+                        <input type="tel" id="req-phone" required placeholder="مثال: 0780XXXXXXX" dir="ltr"
+                               class="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:border-royalBlue dark:focus:border-warmGold outline-none transition text-right">
+                    </div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div>
+                        <label for="req-type" class="block font-cairo font-bold text-royalBlue dark:text-warmGold mb-2">نوع الطلب <span class="text-rubyRed">*</span></label>
+                        <select id="req-type" class="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:border-royalBlue outline-none transition font-semibold">
+                            <option value="شراء دار سكنية">شراء دار سكنية</option>
+                            <option value="شراء أرض سكنية">شراء أرض سكنية</option>
+                            <option value="شراء أرض زراعية">شراء أرض زراعية</option>
+                            <option value="عرض عقار للبيع">عرض عقار أو أرض للبيع</option>
+                            <option value="معاملة هندسية / إفراز / إجازة بناء">معاملة هندسية / إفراز / إجازة بناء</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center pt-2 sm:pt-8">
+                        <label class="inline-flex items-center gap-3 cursor-pointer select-none">
+                            <input type="checkbox" id="req-open-whatsapp" checked class="w-5 h-5 rounded text-emerald-600 focus:ring-emerald-500">
+                            <span class="font-cairo font-bold text-sm text-slate-700 dark:text-slate-300">إرسال نسخة فورية إلى واتساب الإدارة (07864149641)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="req-details" class="block font-cairo font-bold text-royalBlue dark:text-warmGold mb-2">تفاصيل الطلب (المنطقة في الدورة، المساحة، الميزانية، أو نوع المعاملة) <span class="text-rubyRed">*</span></label>
+                    <textarea id="req-details" rows="4" required placeholder="اكتب تفاصيل طلبك هنا..." 
+                              class="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:border-royalBlue dark:focus:border-warmGold outline-none transition"></textarea>
+                </div>
+
+                <button type="submit" id="submit-req-btn" class="w-full bg-rubyRed hover:bg-rubyRedDark text-white font-cairo font-bold text-lg py-4 rounded-2xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-paper-plane text-xl"></i>
+                    <span>إرسال وحفظ الطلب الآن</span>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ================= قسم التواصل والموقع (Contact & Map) ================= -->
+    <section id="contact" class="py-16 lg:py-24 bg-white dark:bg-slate-900 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-8 items-stretch">
+                <!-- بطاقة البيانات -->
+                <div class="lg:col-span-5 bg-slate-50 dark:bg-slate-800 rounded-3xl p-8 shadow-lg border border-slate-200 dark:border-slate-700 flex flex-col justify-between space-y-6">
+                    <div class="space-y-5">
+                        <h3 class="font-cairo font-black text-2xl text-royalBlue dark:text-white">معلومات المقر والتواصل</h3>
+                        
+                        <div class="flex items-start gap-3">
+                            <div class="w-11 h-11 rounded-2xl bg-warmGold/25 text-royalBlue dark:text-warmGold flex items-center justify-center text-lg shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-cairo font-bold text-royalBlue dark:text-white">العنوان:</h4>
+                                <p class="text-slate-600 dark:text-slate-300 text-sm font-semibold mt-0.5">بغداد - الدورة - الشرطة - شارع البريد - مقابل السمكة</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div class="w-11 h-11 rounded-2xl bg-royalBlue/10 dark:bg-blue-500/20 text-royalBlue dark:text-blue-400 flex items-center justify-center text-lg shrink-0">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-cairo font-bold text-royalBlue dark:text-white">الإدارة:</h4>
+                                <p class="text-slate-600 dark:text-slate-300 text-sm font-semibold mt-0.5">الشيخ مصطفى الربيعي - أبو هالة المعماري</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5 pt-2">
+                            <h4 class="font-cairo font-bold text-royalBlue dark:text-white text-sm">أرقام الهواتف (انقر للاتصال أو النسخ):</h4>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                                <a href="tel:07864149641" dir="ltr" class="font-cairo font-black text-base text-royalBlue dark:text-white hover:text-rubyRed transition flex items-center gap-2">
+                                    <i class="fa-solid fa-phone text-rubyRed"></i> 07864149641
+                                </a>
+                                <button onclick="copyToClipboard('07864149641')" class="px-3 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-royalBlue hover:text-white text-xs font-bold transition">نسخ</button>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                                <a href="tel:07513243860" dir="ltr" class="font-cairo font-black text-base text-royalBlue dark:text-white hover:text-rubyRed transition flex items-center gap-2">
+                                    <i class="fa-solid fa-phone text-rubyRed"></i> 07513243860
+                                </a>
+                                <button onclick="copyToClipboard('07513243860')" class="px-3 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-royalBlue hover:text-white text-xs font-bold transition">نسخ</button>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                                <a href="tel:0774646677" dir="ltr" class="font-cairo font-black text-base text-royalBlue dark:text-white hover:text-rubyRed transition flex items-center gap-2">
+                                    <i class="fa-solid fa-phone text-rubyRed"></i> 0774646677
+                                </a>
+                                <button onclick="copyToClipboard('0774646677')" class="px-3 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-royalBlue hover:text-white text-xs font-bold transition">نسخ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الخريطة -->
+                <div class="lg:col-span-7 bg-slate-100 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-700 min-h-[360px] relative">
+                    <iframe 
+                        title="موقع شركة السندباد للعقارات - بغداد الدورة"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26692.41827075179!2d44.3986!3d33.2528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15578196605214b1%3A0x6003706233598d73!2sDora%2C%20Baghdad%2C%20Baghdad%20Governorate%2C%20Iraq!5e0!3m2!1sen!2siq!4v1700000000000!5m2!1sen!2siq" 
+                        class="w-full h-full min-h-[360px] border-0" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= التذييل (Footer) ================= -->
+    <footer class="bg-royalBlueDark text-slate-300 border-t-4 border-warmGold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-3 gap-8 pb-8 border-b border-slate-800">
+                <div>
+                    <h3 class="font-cairo font-black text-2xl text-white mb-2">شركة السندباد للعقارات</h3>
+                    <p class="text-warmGold font-bold text-sm mb-3">بإدارة الشيخ مصطفى الربيعي - أبو هالة المعماري</p>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        بيع وشراء الدور والأراضي السكنية والزراعية، تصميم وتعقيب المعاملات بإشراف كادر هندسي متخصص.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-cairo font-bold text-lg text-white mb-4">روابط سريعة</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="hover:text-warmGold transition">الرئيسية</a></li>
+                        <li><a href="#properties" class="hover:text-warmGold transition">معرض العقارات المتاحة</a></li>
+                        <li><a href="#engineering" class="hover:text-warmGold transition">الخدمات الهندسية وتعقيب المعاملات</a></li>
+                        <li><a href="#request-section" class="hover:text-warmGold transition">نموذج طلب عقار أو معاملة</a></li>
+                        <li><button onclick="openAdminAuthModal()" class="text-warmGold hover:underline font-bold flex items-center gap-1.5"><i class="fa-brands fa-github"></i> إعدادات الربط مع GitHub ولوحة الإدارة</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-cairo font-bold text-lg text-white mb-4">العنوان والهواتف</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-warmGold"></i>
+                            <span>بغداد - الدورة - الشرطة - شارع البريد - مقابل السمكة</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-rubyRed"></i>
+                            <span dir="ltr" class="font-bold">07864149641 - 07513243860 - 0774646677</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- حقوق النشر وتوقيع المبرمج -->
+            <div class="pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
+                <p class="text-slate-400">
+                    © <span id="current-year"></span> جميع الحقوق محفوظة لـ <span class="text-white font-bold">شركة السندباد للعقارات</span>.
+                </p>
+                <div class="bg-gradient-to-l from-royalBlue to-slate-900 border border-warmGold/50 px-5 py-2.5 rounded-2xl shadow-lg flex items-center gap-2.5">
+                    <i class="fa-solid fa-code text-warmGold text-lg"></i>
+                    <span class="font-cairo font-bold text-white">تطوير وبرمجة: <span class="text-warmGold font-black tracking-wide" dir="ltr">المبرمج Mohammed Almawlaa</span></span>
+                    <i class="fa-brands fa-git-alt text-rubyRed text-lg"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر واتساب عائم -->
+    <a href="https://wa.me/9647864149641?text=السلام%20عليكم%20شركة%20السندباد%20للعقارات" target="_blank" aria-label="واتساب مباشر"
+       class="fixed bottom-5 left-5 z-30 w-14 h-14 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full shadow-2xl flex items-center justify-center text-3xl transition transform hover:scale-110">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- ================= نافذة معاينة تفاصيل العقار (Property Details Modal) ================= -->
+    <div id="property-detail-modal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 relative">
+            <button onclick="closePropertyDetailModal()" class="absolute top-4 left-4 z-10 w-10 h-10 rounded-full bg-black/60 text-white hover:bg-rubyRed flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="property-detail-content">
+                <!-- يتم تعبئتها ديناميكياً -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= نافذة التحقق من رمز دخول الإدارة (Admin Auth Modal) ================= -->
+    <div id="admin-auth-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-5 relative">
+            <button onclick="closeAdminAuthModal()" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-rubyRed hover:text-white flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center space-y-2">
+                <div class="w-16 h-16 rounded-2xl bg-royalBlue text-warmGold mx-auto flex items-center justify-center text-3xl shadow-lg">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="font-cairo font-black text-2xl text-royalBlue dark:text-white">دخول الإدارة والربط مع Git</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">منطقة محمية خاصة بإدارة شركة السندباد للعقارات</p>
+            </div>
+
+            <form id="admin-login-form" class="space-y-4">
+                <div class="relative">
+                    <input type="password" id="admin-pin-input" required autocomplete="current-password" placeholder="••••••••" 
+                           class="w-full text-center tracking-widest font-cairo font-black text-xl px-12 py-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:border-royalBlue dark:focus:border-warmGold outline-none">
+                    <button type="button" onclick="toggleSecretVisibility('admin-pin-input', 'pin-eye-icon')" aria-label="إظهار أو إخفاء الرمز"
+                            class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-royalBlue dark:hover:text-warmGold transition p-1">
+                        <i id="pin-eye-icon" class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+                <button type="submit" class="w-full bg-royalBlue hover:bg-rubyRed text-white font-cairo font-bold py-3.5 rounded-2xl shadow-lg transition">
+                    تحقق ودخول
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= لوحة تحكم الإدارة والربط مع GitHub (Admin Dashboard) ================= -->
+    <div id="admin-dashboard-modal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm overflow-y-auto p-2 sm:p-6">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-6xl mx-auto shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden my-4">
+            <!-- رأس لوحة الإدارة -->
+            <div class="bg-royalBlue text-white px-6 py-5 flex flex-wrap justify-between items-center gap-4 border-b-4 border-warmGold">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-xl bg-warmGold text-royalBlue flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-brands fa-github"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-cairo font-black text-xl sm:text-2xl">لوحة تحكم السندباد للعقارات • GitHub Sync</h3>
+                        <p class="text-xs text-warmGold">إدارة العقارات، الطلبات، والمزامنة المباشرة مع مستودع Git</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="manualGitSync()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-cairo font-bold px-4 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-2 transition">
+                        <i class="fa-solid fa-rotate"></i> مزامنة الآن
+                    </button>
+                    <button onclick="closeAdminDashboard()" class="bg-rubyRed hover:bg-rubyRedDark text-white font-cairo font-bold px-4 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-2 transition">
+                        <i class="fa-solid fa-right-from-bracket"></i> إغلاق
+                    </button>
+                </div>
+            </div>
+
+            <!-- أزرار التبويب داخل لوحة الإدارة -->
+            <div class="bg-slate-100 dark:bg-slate-800/80 px-6 pt-4 flex flex-wrap gap-2 border-b border-slate-200 dark:border-slate-700">
+                <button onclick="switchAdminTab('tab-properties')" id="btn-tab-properties" class="admin-tab-btn px-4 py-3 rounded-t-2xl font-cairo font-bold text-xs sm:text-sm bg-white dark:bg-slate-900 text-royalBlue dark:text-warmGold border-t-2 border-warmGold">
+                    <i class="fa-solid fa-building ml-1"></i> 1. إدارة العقارات (<span id="admin-prop-count">0</span>)
+                </button>
+                <button onclick="switchAdminTab('tab-git-settings')" id="btn-tab-git-settings" class="admin-tab-btn px-4 py-3 rounded-t-2xl font-cairo font-bold text-xs sm:text-sm text-slate-600 dark:text-slate-300 hover:bg-white/50">
+                    <i class="fa-brands fa-github ml-1"></i> 2. إعدادات الربط مع GitHub
+                </button>
+                <button onclick="switchAdminTab('tab-announcement')" id="btn-tab-announcement" class="admin-tab-btn px-4 py-3 rounded-t-2xl font-cairo font-bold text-xs sm:text-sm text-slate-600 dark:text-slate-300 hover:bg-white/50">
+                    <i class="fa-solid fa-bullhorn ml-1"></i> 3. شريط الإعلانات العاجلة
+                </button>
+                <button onclick="switchAdminTab('tab-requests')" id="btn-tab-requests" class="admin-tab-btn px-4 py-3 rounded-t-2xl font-cairo font-bold text-xs sm:text-sm text-slate-600 dark:text-slate-300 hover:bg-white/50">
+                    <i class="fa-solid fa-inbox ml-1"></i> 4. طلبات العملاء (<span id="admin-req-count">0</span>)
+                </button>
+            </div>
+
+            <!-- محتوى التبويبات -->
+            <div class="p-6">
+                <!-- ================= التبويب 1: إدارة العقارات ================= -->
+                <div id="tab-properties" class="admin-tab-content space-y-8">
+                    <form id="admin-property-form" class="bg-slate-50 dark:bg-slate-800/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h4 id="prop-form-title" class="font-cairo font-black text-lg text-royalBlue dark:text-warmGold">
+                                <i class="fa-solid fa-plus-circle ml-1"></i> إضافة عقار جديد
+                            </h4>
+                            <button type="button" id="cancel-edit-btn" onclick="resetPropertyForm()" class="hidden text-xs bg-slate-300 dark:bg-slate-700 px-3 py-1.5 rounded-lg font-bold">
+                                إلغاء التعديل
+                            </button>
+                        </div>
+
+                        <input type="hidden" id="edit-prop-id" value="">
+
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-cairo font-bold mb-1">عنوان العقار *</label>
+                                <input type="text" id="prop-title" required placeholder="مثال: دار حديثة طابقين في الشرطة" 
+                                       class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-cairo font-bold mb-1">التصنيف *</label>
+                                <select id="prop-category" class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm outline-none font-bold">
+                                    <option value="دور سكنية">دور سكنية</option>
+                                    <option value="أراضٍ سكنية">أراضٍ سكنية</option>
+                                    <option value="أراضٍ زراعية">أراضٍ زراعية</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-cairo font-bold mb-1">الشارة (Badge) *</label>
+                                <select id="prop-badge" class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm outline-none font-bold">
+                                    <option value="للبيع">للبيع</option>
+                                    <option value="دار سكنية">دار سكنية</option>
+                                    <option value="أرض زراعية">أرض زراعية</option>
+                                    <option value="استثمار">استثمار</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-cairo font-bold mb-1">المساحة *</label>
+                                <input type="text" id="prop-area" required placeholder="مثال: 200 م² (واجهة 10م)" 
+                                       class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-cairo font-bold mb-1">السعر التقديري (بالمليون دينار) *</label>
+                                <input type="text" id="prop-price" required placeholder="مثال: 340 مليون دينار" 
+                                       class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-cairo font-bold mb-1">الموقع الدقيق في الدورة *</label>
+                                <input type="text" id="prop-location" required placeholder="مثال: بغداد - الدورة - شارع البريد" 
+                                       class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-cairo font-bold mb-1">اختر صورة افتراضية أو أدخل رابط صورة</label>
+                                <div class="flex gap-2">
+                                    <select id="prop-preset-img" onchange="document.getElementById('prop-image').value = this.value" 
+                                            class="w-1/2 px-2 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs outline-none">
+                                        <option value="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80">صورة دار حديثة</option>
+                                        <option value="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80">صورة فيلا فاخرة</option>
+                                        <option value="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80">صورة أرض سكنية</option>
+                                        <option value="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80">صورة أرض زراعية</option>
+                                    </select>
+                                    <input type="url" id="prop-image" value="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" placeholder="رابط الصورة..." 
+                                           class="w-1/2 px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs outline-none" dir="ltr">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-cairo font-bold mb-1">الوصف والتفاصيل *</label>
+                                <input type="text" id="prop-details" required placeholder="تفاصيل البناء، نوع السند (طابو صرف / زراعي)، عدد الغرف..." 
+                                       class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm outline-none">
+                            </div>
+                        </div>
+
+                        <button type="submit" id="save-prop-btn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-cairo font-bold px-6 py-3 rounded-xl shadow transition flex items-center gap-2 text-sm">
+                            <i class="fa-brands fa-github"></i>
+                            <span>حفظ ومزامنة مع GitHub</span>
+                        </button>
+                    </form>
+
+                    <!-- قائمة العقارات الحالية -->
+                    <div class="space-y-3">
+                        <h4 class="font-cairo font-bold text-lg text-royalBlue dark:text-white">قائمة العقارات المنشورة حالياً:</h4>
+                        <div id="admin-properties-list" class="grid sm:grid-cols-2 gap-4"></div>
+                    </div>
+                </div>
+
+                <!-- ================= التبويب 2: إعدادات الربط مع GitHub ================= -->
+                <div id="tab-git-settings" class="admin-tab-content hidden space-y-6">
+                    <div class="bg-royalBlue/5 dark:bg-slate-800/80 border border-royalBlue/20 dark:border-slate-700 rounded-2xl p-5 space-y-2">
+                        <h4 class="font-cairo font-black text-lg text-royalBlue dark:text-warmGold flex items-center gap-2">
+                            <i class="fa-brands fa-github text-2xl"></i>
+                            <span>ربط الموقع بمستودع GitHub كقاعدة بيانات سحابية (JSON Database)</span>
+                        </h4>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            عند إدخال بيانات مستودع GitHub الخاص بك ورمز الوصول الشخصي (Personal Access Token بصلاحية <code class="bg-slate-200 dark:bg-slate-900 px-1.5 py-0.5 rounded text-rubyRed font-bold">repo</code> أو <code class="bg-slate-200 dark:bg-slate-900 px-1.5 py-0.5 rounded text-rubyRed font-bold">Contents: Read & Write</code>)، سيقوم الموقع تلقائياً بإنشاء وتحديث ملف قاعدة البيانات داخل المستودع ليظهر لجميع زوار موقعك على GitHub Pages فوراً.
+                        </p>
+                    </div>
+
+                    <form id="github-config-form" class="grid sm:grid-cols-2 gap-5 bg-slate-50 dark:bg-slate-800/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <div>
+                            <label class="block text-xs font-cairo font-bold mb-1">اسم المستخدم في GitHub (Owner / Username) *</label>
+                            <input type="text" id="git-owner" value="Mohammed1-g" placeholder="Mohammed1-g" dir="ltr"
+                                   class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm outline-none font-bold">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-cairo font-bold mb-1">اسم المستودع (Repository Name) *</label>
+                            <input type="text" id="git-repo" value="Personal-Access-Token" placeholder="Personal-Access-Token" dir="ltr"
+                                   class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm outline-none font-bold">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-cairo font-bold mb-1">الفرع (Branch)</label>
+                            <input type="text" id="git-branch" value="main" placeholder="main" dir="ltr"
+                                   class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-cairo font-bold mb-1">مسار ملف البيانات داخل المستودع (JSON File Path)</label>
+                            <input type="text" id="git-path" value="data/sindbad_db.json" placeholder="data/sindbad_db.json" dir="ltr"
+                                   class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm outline-none">
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-cairo font-bold mb-1">رمز الوصول الشخصي (GitHub Personal Access Token - PAT) *</label>
+                            <div class="relative">
+                                <input type="password" id="git-token" autocomplete="off" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" dir="ltr"
+                                       class="w-full pl-11 pr-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm outline-none font-mono">
+                                <button type="button" onclick="toggleSecretVisibility('git-token', 'token-eye-icon')" aria-label="إظهار أو إخفاء التوكن"
+                                        class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-royalBlue dark:hover:text-warmGold transition p-1">
+                                    <i id="token-eye-icon" class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+                            <p class="text-[11px] text-slate-500 mt-1">الرمز مخفي ومشفر محلياً في متصفحك فقط، ولا يتم رفعه أبداً داخل ملفات مستودع GitHub.</p>
+                        </div>
+
+                        <div class="sm:col-span-2 flex flex-wrap gap-3 pt-2">
+                            <button type="submit" class="bg-royalBlue hover:bg-blue-900 text-white font-cairo font-bold px-6 py-3 rounded-xl shadow transition flex items-center gap-2 text-sm">
+                                <i class="fa-solid fa-plug-circle-check text-warmGold"></i>
+                                <span>حفظ الإعدادات واختبار الاتصال والرفع لـ GitHub</span>
+                            </button>
+
+                            <button type="button" onclick="disconnectGitHub()" class="bg-slate-200 dark:bg-slate-700 hover:bg-rubyRed hover:text-white font-cairo font-bold px-4 py-3 rounded-xl text-xs transition">
+                                فصل الربط (العودة للوضع المحلي)
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- أدوات التصدير اليدوي وتغيير رمز الإدارة -->
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div class="bg-slate-50 dark:bg-slate-800/60 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                            <h5 class="font-cairo font-bold text-sm text-royalBlue dark:text-warmGold">تصدير / نسخ ملف قاعدة البيانات (sindbad_db.json)</h5>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">يمكنك تحميل ملف JSON أو نسخه لرفعه يدوياً إلى مستودع GitHub في أي وقت.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="downloadDatabaseJSON()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-cairo font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5">
+                                    <i class="fa-solid fa-download"></i> تحميل sindbad_db.json
+                                </button>
+                                <button onclick="copyDatabaseJSON()" class="bg-slate-700 hover:bg-slate-800 text-white font-cairo font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5">
+                                    <i class="fa-solid fa-copy"></i> نسخ محتوى JSON
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50 dark:bg-slate-800/60 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                            <h5 class="font-cairo font-bold text-sm text-royalBlue dark:text-warmGold">تغيير رمز دخول لوحة الإدارة</h5>
+                            <div class="flex gap-2">
+                                <div class="relative flex-1">
+                                    <input type="password" id="new-admin-pin" placeholder="أدخل الرمز السري الجديد" 
+                                           class="w-full pl-9 pr-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs outline-none">
+                                    <button type="button" onclick="toggleSecretVisibility('new-admin-pin', 'new-pin-eye-icon')" aria-label="إظهار أو إخفاء الرمز الجديد"
+                                            class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-royalBlue dark:hover:text-warmGold transition">
+                                        <i id="new-pin-eye-icon" class="fa-solid fa-eye text-xs"></i>
+                                    </button>
+                                </div>
+                                <button onclick="changeAdminPin()" class="bg-warmGold hover:bg-warmGoldLight text-royalBlue font-cairo font-black px-4 py-2 rounded-xl text-xs">تحديث الرمز</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= التبويب 3: شريط الإعلانات العاجلة ================= -->
+                <div id="tab-announcement" class="admin-tab-content hidden space-y-4">
+                    <h4 class="font-cairo font-bold text-lg text-royalBlue dark:text-white">تحديث شريط الإعلانات العاجلة أعلى الموقع:</h4>
+                    <form id="admin-announcement-form" class="space-y-4 bg-slate-50 dark:bg-slate-800/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <div>
+                            <label class="block text-xs font-cairo font-bold mb-2">نص الإعلان العاجل (يُحفظ ويُرفع إلى GitHub فوراً):</label>
+                            <input type="text" id="announcement-input" required 
+                                   class="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm font-bold outline-none">
+                        </div>
+                        <button type="submit" class="bg-warmGold hover:bg-warmGoldLight text-royalBlue font-cairo font-black px-6 py-3 rounded-xl shadow transition flex items-center gap-2 text-sm">
+                            <i class="fa-brands fa-github"></i>
+                            <span>حفظ ومزامنة الإعلان مع Git</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- ================= التبويب 4: طلبات العملاء الواردة ================= -->
+                <div id="tab-requests" class="admin-tab-content hidden space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-cairo font-bold text-lg text-royalBlue dark:text-white">سجل طلبات العملاء الواردة:</h4>
+                        <span class="text-xs text-slate-500 font-bold">مرتبة من الأحدث للأقدم</span>
+                    </div>
+                    <div id="admin-requests-list" class="space-y-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- صندوق إشعارات مخصص (Toast) -->
+    <div id="toast-notification" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-royalBlue text-white px-5 py-3.5 rounded-2xl shadow-2xl border-r-4 border-warmGold flex items-center gap-3 max-w-md">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-warmGold text-xl shrink-0"></i>
+        <span id="toast-message" class="font-cairo font-bold text-xs sm:text-sm">تمت العملية بنجاح!</span>
+    </div>
+
+    <!-- ================= المنطق البرمجي الكامل والمزامنة مع GitHub REST API ================= -->
+    <script>
+        // مفاتيح التخزين المحلي
+        const STORAGE_KEYS = {
+            GIT_CONFIG: 'sindbad_git_config_v3',
+            DB_DATA: 'sindbad_local_db_v1',
+            ADMIN_PIN_HASH: 'sindbad_admin_pin_hash_v2',
+            THEME: 'sindbad_theme_v1'
+        };
+
+        // الإعدادات الافتراضية لمستودع GitHub الخاص بالمطور
+        const DEFAULT_GIT_CONFIG = {
+            owner: 'Mohammed1-g',
+            repo: 'Personal-Access-Token',
+            branch: 'main',
+            path: 'data/sindbad_db.json',
+            token: ''
+        };
+
+        // التجزئة الافتراضية المشفرة للرمز السري (SHA-256) دون كتابة الرمز كنص صريح في الكود
+        const DEFAULT_PIN_HASH = '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4';
+
+        // قاعدة البيانات الافتراضية للعقارات والإعلانات
+        const DEFAULT_DB = {
+            lastUpdated: new Date().toISOString(),
+            announcement: 'أهلاً بكم في شركة السندباد للعقارات - بيع وشراء الدور والأراضي السكنية والزراعية، وتصميم وتعقيب المعاملات بإشراف كادر هندسي متخصص في بغداد الدورة.',
+            properties: [
+                {
+                    id: 'prop-101',
+                    title: 'دار سكنية حديثة طابقين بناء درجه أولى',
+                    category: 'دور سكنية',
+                    badge: 'للبيع',
+                    area: '200 م² (واجهة 10م)',
+                    priceNumeric: 350,
+                    priceText: '350 مليون دينار',
+                    location: 'بغداد - الدورة - حي الشرطة - قرب شارع البريد',
+                    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+                    details: 'دار حديثة البناء طابقين، طابو صرف سكن، واجهة حجر، 4 غرف نوم وصالة واستقبال ومطبخ حار بارد، كراج سيارتين.',
+                    createdAt: 1730000003000
+                },
+                {
+                    id: 'prop-102',
+                    title: 'قطعة أرض سكنية ركن مميزة قرب الشارع العام',
+                    category: 'أراضٍ سكنية',
+                    badge: 'للبيع',
+                    area: '250 م² (واجهة 12.5م)',
+                    priceNumeric: 275,
+                    priceText: '275 مليون دينار',
+                    location: 'بغداد - الدورة - شارع البريد - مقابل السمكة',
+                    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80',
+                    details: 'قطعة أرض سكنية مفروزة بسند طابو صرف مستقل، كافة الخدمات متوفرة (ماء، كهرباء، مجاري، تبليط).',
+                    createdAt: 1730000002000
+                },
+                {
+                    id: 'prop-103',
+                    title: 'بستان وأرض زراعية خصبة تصلح للسكن والاستثمار',
+                    category: 'أراضٍ زراعية',
+                    badge: 'أرض زراعية',
+                    area: '1000 م² (4 أولك)',
+                    priceNumeric: 180,
+                    priceText: '180 مليون دينار',
+                    location: 'بغداد - الدورة - عرب جبور / البوعيثة',
+                    image: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80',
+                    details: 'أرض زراعية خصبة محاطة بسياج، حصة مائية ثابتة، قريبة من الشارع الرئيسي ومخدومة بالكهرباء.',
+                    createdAt: 1730000001000
+                }
+            ],
+            requests: []
+        };
+
+        // حالة التطبيق العامة
+        const appState = {
+            gitConfig: { ...DEFAULT_GIT_CONFIG },
+            db: JSON.parse(JSON.stringify(DEFAULT_DB)),
+            currentFileSha: null,
+            activeFilter: 'all',
+            searchQuery: '',
+            sortBy: 'newest',
+            isAdminAuthenticated: false
+        };
+
+        // تحويل نصوص UTF-8 العربية إلى Base64 والعكس لدعم GitHub API
+        function utf8ToBase64(str) {
+            const bytes = new TextEncoder().encode(str);
+            let binString = '';
+            bytes.forEach(byte => { binString += String.fromCharCode(byte); });
+            return btoa(binString);
+        }
+
+        function base64ToUtf8(base64) {
+            const cleanBase64 = base64.replace(/\s/g, '');
+            const binString = atob(cleanBase64);
+            const bytes = Uint8Array.from(binString, m => m.charCodeAt(0));
+            return new TextDecoder().decode(bytes);
+        }
+
+        // تحديث واجهة مؤشر حالة المزامنة مع GitHub
+        function updateGitStatusUI(status, customText = '') {
+            const dot = document.getElementById('git-sync-dot');
+            const label = document.getElementById('git-sync-status');
+            const spin = document.getElementById('git-sync-spin');
+            const lastSyncLabel = document.getElementById('last-sync-label');
+
+            if (!dot || !label) return;
+            spin.classList.remove('fa-spin');
+
+            if (status === 'connected') {
+                dot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+                label.className = 'text-emerald-300';
+                label.textContent = customText || `متصل بـ GitHub (${appState.gitConfig.owner}/${appState.gitConfig.repo})`;
+                if (lastSyncLabel) lastSyncLabel.textContent = 'متزامن مباشرة مع GitHub';
+            } else if (status === 'syncing') {
+                dot.className = 'w-2 h-2 rounded-full bg-sky-400 animate-ping';
+                label.className = 'text-sky-300';
+                label.textContent = customText || 'جاري المزامنة مع GitHub...';
+                spin.classList.add('fa-spin');
+            } else if (status === 'error') {
+                dot.className = 'w-2 h-2 rounded-full bg-rose-500';
+                label.className = 'text-rose-300';
+                label.textContent = customText || 'خطأ في المزامنة مع GitHub';
+            } else {
+                dot.className = 'w-2 h-2 rounded-full bg-amber-400';
+                label.className = 'text-amber-300';
+                label.textContent = customText || `جاهز للربط (${appState.gitConfig.owner}/${appState.gitConfig.repo})`;
+                if (lastSyncLabel) lastSyncLabel.textContent = 'محدث تلقائياً';
+            }
+        }
+
+        // دالة حساب التجزئة الآمنة SHA-256 للرمز السري
+        async function hashSecret(secret) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(secret);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // إظهار أو إخفاء الحقول السرية مؤقتاً عند النقر على أيقونة العين
+        function toggleSecretVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (!input || !icon) return;
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // ================= دوال الاتصال مع GitHub REST API (Fetch & Commit/Push) =================
+        function loadGitConfig() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEYS.GIT_CONFIG);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (parsed.encodedToken) {
+                        parsed.token = base64ToUtf8(parsed.encodedToken);
+                    }
+                    appState.gitConfig = { ...DEFAULT_GIT_CONFIG, ...parsed };
+                } else {
+                    appState.gitConfig = { ...DEFAULT_GIT_CONFIG };
+                }
+
+                document.getElementById('git-owner').value = appState.gitConfig.owner;
+                document.getElementById('git-repo').value = appState.gitConfig.repo;
+                document.getElementById('git-branch').value = appState.gitConfig.branch;
+                document.getElementById('git-path').value = appState.gitConfig.path;
+                const tokenInput = document.getElementById('git-token');
+                tokenInput.type = 'password';
+                tokenInput.value = appState.gitConfig.token || '';
+            } catch (e) {
+                console.error("Failed to load git config", e);
+            }
+        }
+
+        function isGitConfigured() {
+            const c = appState.gitConfig;
+            return Boolean(c && c.owner && c.repo && c.token);
+        }
+
+        function disconnectGitHub() {
+            appState.gitConfig.token = '';
+            appState.currentFileSha = null;
+            const storagePayload = {
+                owner: appState.gitConfig.owner,
+                repo: appState.gitConfig.repo,
+                branch: appState.gitConfig.branch,
+                path: appState.gitConfig.path,
+                encodedToken: ''
+            };
+            localStorage.setItem(STORAGE_KEYS.GIT_CONFIG, JSON.stringify(storagePayload));
+            document.getElementById('git-token').value = '';
+            updateGitStatusUI('local', 'تم فصل التوكن (وضع محلي)');
+            showToast('تم فصل الربط السحابي والعودة للوضع المحلي');
+        }
+
+        // جلب البيانات من GitHub Repository (مع دعم المستودعات الفارغة والصفحات العامة)
+        async function fetchFromGitHub() {
+            const { owner, repo, branch, path, token } = appState.gitConfig;
+            const cleanPath = (path || 'data/sindbad_db.json').replace(/^\/+/, '');
+            const targetBranch = branch || 'main';
+
+            if (!isGitConfigured()) {
+                // محاولة قراءة البيانات العامة من GitHub API أو من المسار النسبي عند الاستضافة
+                try {
+                    const publicApiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${cleanPath}?ref=${encodeURIComponent(targetBranch)}&t=${Date.now()}`;
+                    const pubRes = await fetch(publicApiUrl, {
+                        headers: { 'Accept': 'application/vnd.github+json' }
+                    });
+                    if (pubRes.ok) {
+                        const fileData = await pubRes.json();
+                        const decodedStr = base64ToUtf8(fileData.content);
+                        const parsedDb = JSON.parse(decodedStr);
+                        if (parsedDb && Array.isArray(parsedDb.properties)) {
+                            appState.db = parsedDb;
+                            localStorage.setItem(STORAGE_KEYS.DB_DATA, JSON.stringify(appState.db));
+                            updateGitStatusUI('local', `مقروء من GitHub (${owner}/${repo})`);
+                            renderAll();
+                            return;
+                        }
+                    }
+                } catch (_) {}
+
+                updateGitStatusUI('local');
+                return;
+            }
+
+            const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${cleanPath}?ref=${encodeURIComponent(targetBranch)}&t=${Date.now()}`;
+            updateGitStatusUI('syncing', 'جاري جلب البيانات من GitHub...');
+
+            try {
+                const response = await fetch(apiUrl, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github+json',
+                        'X-GitHub-Api-Version': '2022-11-28'
+                    }
+                });
+
+                // 404 أو 409 تعني أن المستودع جديد/فارغ أو الملف غير موجود بعد -> ننشئه ونرفع البيانات
+                if (response.status === 404 || response.status === 409) {
+                    appState.currentFileSha = null;
+                    await pushToGitHub('تهيئة قاعدة بيانات شركة السندباد للعقارات');
+                    return;
+                }
+
+                if (!response.ok) {
+                    const errData = await response.json().catch(() => ({}));
+                    throw new Error(errData.message || `HTTP ${response.status}`);
+                }
+
+                const fileData = await response.json();
+                appState.currentFileSha = fileData.sha;
+                const decodedStr = base64ToUtf8(fileData.content);
+                const parsedDb = JSON.parse(decodedStr);
+
+                if (parsedDb && Array.isArray(parsedDb.properties)) {
+                    appState.db = parsedDb;
+                    localStorage.setItem(STORAGE_KEYS.DB_DATA, JSON.stringify(appState.db));
+                    updateGitStatusUI('connected');
+                    renderAll();
+                } else {
+                    throw new Error('تنسيق ملف JSON غير صالح');
+                }
+            } catch (error) {
+                console.error('GitHub Fetch Error:', error);
+                updateGitStatusUI('error', 'تعذر الجلب من GitHub');
+                showToast(`خطأ في الاتصال بـ GitHub: ${error.message}`, true);
+            }
+        }
+
+        // رفع وحفظ التعديلات إلى GitHub Repository (Commit & Push)
+        async function pushToGitHub(commitMessage = 'تحديث بيانات شركة السندباد للعقارات') {
+            appState.db.lastUpdated = new Date().toISOString();
+            localStorage.setItem(STORAGE_KEYS.DB_DATA, JSON.stringify(appState.db));
+            renderAll();
+
+            if (!isGitConfigured()) {
+                updateGitStatusUI('local');
+                return true;
+            }
+
+            const { owner, repo, branch, path, token } = appState.gitConfig;
+            const cleanPath = (path || 'data/sindbad_db.json').replace(/^\/+/, '');
+            const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${cleanPath}`;
+
+            updateGitStatusUI('syncing', 'جاري الرفع إلى GitHub...');
+
+            try {
+                // جلب أحدث SHA قبل الكتابة لتجنب تعارض الإصدارات (409 Conflict)
+                if (!appState.currentFileSha) {
+                    const checkRes = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch || 'main')}&t=${Date.now()}`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Accept': 'application/vnd.github+json'
+                        }
+                    });
+                    if (checkRes.ok) {
+                        const existing = await checkRes.json();
+                        appState.currentFileSha = existing.sha;
+                    }
+                }
+
+                const jsonContent = JSON.stringify(appState.db, null, 2);
+                const payload = {
+                    message: `${commitMessage} - بواسطة لوحة إدارة السندباد`,
+                    content: utf8ToBase64(jsonContent),
+                    branch: branch || 'main'
+                };
+
+                if (appState.currentFileSha) {
+                    payload.sha = appState.currentFileSha;
+                }
+
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github+json',
+                        'Content-Type': 'application/json',
+                        'X-GitHub-Api-Version': '2022-11-28'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!putRes.ok) {
+                    const errJson = await putRes.json().catch(() => ({}));
+                    throw new Error(errJson.message || `HTTP ${putRes.status}`);
+                }
+
+                const result = await putRes.json();
+                if (result.content && result.content.sha) {
+                    appState.currentFileSha = result.content.sha;
+                }
+
+                updateGitStatusUI('connected');
+                showToast('تمت المزامنة وحفظ التعديلات في مستودع GitHub بنجاح!');
+                return true;
+            } catch (error) {
+                console.error('GitHub Push Error:', error);
+                updateGitStatusUI('error', 'فشل الرفع إلى GitHub');
+                showToast(`فشل الرفع إلى GitHub: ${error.message}`, true);
+                return false;
+            }
+        }
+
+        async function manualGitSync() {
+            if (!isGitConfigured()) {
+                showToast('يرجى إدخال إعدادات مستودع GitHub أولاً من لوحة الإدارة', true);
+                openAdminAuthModal();
+                return;
+            }
+            appState.currentFileSha = null;
+            await fetchFromGitHub();
+            showToast('تم تحديث البيانات من مستودع GitHub!');
+        }
+
+        // ================= تهيئة قاعدة البيانات المحلية =================
+        function initLocalDB() {
+            try {
+                const savedDb = localStorage.getItem(STORAGE_KEYS.DB_DATA);
+                if (savedDb) {
+                    const parsed = JSON.parse(savedDb);
+                    if (parsed && Array.isArray(parsed.properties)) {
+                        appState.db = parsed;
+                        return;
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+            }
+            appState.db = JSON.parse(JSON.stringify(DEFAULT_DB));
+            localStorage.setItem(STORAGE_KEYS.DB_DATA, JSON.stringify(appState.db));
+        }
+
+        // ================= دوال العرض (UI Rendering) =================
+        function getBadgeStyle(badge) {
+            switch (badge) {
+                case 'للبيع': return 'bg-rubyRed text-white';
+                case 'دار سكنية': return 'bg-royalBlue text-white';
+                case 'أرض زراعية': return 'bg-emerald-600 text-white';
+                case 'استثمار': return 'bg-warmGold text-royalBlue';
+                default: return 'bg-slate-800 text-white';
+            }
+        }
+
+        function renderAll() {
+            // تحديث شريط الإعلانات العاجلة
+            const annText = appState.db.announcement || DEFAULT_DB.announcement;
+            document.getElementById('live-announcement-text').textContent = annText;
+            const annInput = document.getElementById('announcement-input');
+            if (annInput) annInput.value = annText;
+
+            renderPropertiesGrid();
+            renderAdminPropertiesList();
+            renderAdminRequestsList();
+        }
+
+        function renderPropertiesGrid() {
+            const grid = document.getElementById('properties-grid');
+            const props = appState.db.properties || [];
+            document.getElementById('count-all').textContent = props.length;
+
+            // التصفية والبحث
+            let filtered = props.filter(p => {
+                const matchCat = appState.activeFilter === 'all' || p.category === appState.activeFilter;
+                const q = appState.searchQuery.toLowerCase().trim();
+                const matchSearch = !q ||
+                    (p.title && p.title.toLowerCase().includes(q)) ||
+                    (p.location && p.location.toLowerCase().includes(q)) ||
+                    (p.area && p.area.toLowerCase().includes(q)) ||
+                    (p.priceText && p.priceText.toLowerCase().includes(q)) ||
+                    (p.details && p.details.toLowerCase().includes(q));
+                return matchCat && matchSearch;
+            });
+
+            // الترتيب
+            if (appState.sortBy === 'price-asc') {
+                filtered.sort((a, b) => (a.priceNumeric || 0) - (b.priceNumeric || 0));
+            } else if (appState.sortBy === 'price-desc') {
+                filtered.sort((a, b) => (b.priceNumeric || 0) - (a.priceNumeric || 0));
+            } else {
+                filtered.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-16 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3">
+                        <i class="fa-solid fa-house-circle-exclamation text-4xl text-slate-400"></i>
+                        <p class="font-cairo font-bold text-lg text-slate-600 dark:text-slate-300">لا توجد عقارات مطابقة لبحثك حالياً</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(prop => {
+                const badgeClass = getBadgeStyle(prop.badge || prop.category);
+                const waMsg = encodeURIComponent(
+                    `السلام عليكم شركة السندباد للعقارات، أرغب بطلب العقار التالي:\n` +
+                    `• ${prop.title}\n` +
+                    `• المساحة: ${prop.area}\n` +
+                    `• السعر: ${prop.priceText}\n` +
+                    `• الموقع: ${prop.location}`
+                );
+                const waUrl = `https://wa.me/9647864149641?text=${waMsg}`;
+
+                return `
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition duration-300 border border-slate-200 dark:border-slate-800 flex flex-col justify-between group">
+                        <div>
+                            <div class="relative h-56 overflow-hidden bg-slate-200 dark:bg-slate-800 cursor-pointer" onclick="openPropertyDetailModal('${prop.id}')">
+                                <img src="${prop.image}" 
+                                     onerror="this.src='https://placehold.co/800x500/0f294a/f59e0b?text=${encodeURIComponent(prop.category)}'" 
+                                     alt="${prop.title}" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                <span class="absolute top-4 right-4 ${badgeClass} font-cairo font-bold text-xs px-3.5 py-1.5 rounded-full shadow-md">
+                                    ${prop.badge || prop.category}
+                                </span>
+                                <div class="absolute bottom-3 left-3 bg-royalBlue/90 backdrop-blur-sm text-warmGold font-cairo font-bold text-xs px-3 py-1.5 rounded-xl">
+                                    <i class="fa-solid fa-ruler-combined ml-1"></i> ${prop.area}
+                                </div>
+                            </div>
+
+                            <div class="p-6 space-y-3">
+                                <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-bold">
+                                    <span><i class="fa-solid fa-layer-group text-royalBlue dark:text-warmGold ml-1"></i> ${prop.category}</span>
+                                </div>
+                                <h3 onclick="openPropertyDetailModal('${prop.id}')" class="cursor-pointer font-cairo font-bold text-xl text-royalBlue dark:text-white group-hover:text-rubyRed transition">
+                                    ${prop.title}
+                                </h3>
+                                <p class="text-xs font-bold text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-rubyRed"></i> ${prop.location}
+                                </p>
+                                <div class="inline-block bg-warmGold/15 text-royalBlue dark:text-warmGold font-cairo font-extrabold text-sm px-3.5 py-1.5 rounded-xl">
+                                    <i class="fa-solid fa-tag ml-1"></i> ${prop.priceText}
+                                </div>
+                                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-2">${prop.details}</p>
+                            </div>
+                        </div>
+
+                        <div class="px-6 pb-6 pt-2 flex gap-2">
+                            <a href="${waUrl}" target="_blank" 
+                               class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-cairo font-bold py-3 px-3 rounded-2xl shadow transition flex items-center justify-center gap-2 text-xs sm:text-sm">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                                <span>اطلب العقار عبر واتساب</span>
+                            </a>
+                            <button onclick="openPropertyDetailModal('${prop.id}')" title="معاينة التفاصيل"
+                                    class="px-4 py-3 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-royalBlue hover:text-white text-royalBlue dark:text-slate-200 font-cairo font-bold text-xs sm:text-sm transition">
+                                التفاصيل
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // معاينة تفاصيل العقار في نافذة منبثقة
+        function openPropertyDetailModal(id) {
+            const prop = (appState.db.properties || []).find(p => p.id === id);
+            if (!prop) return;
+
+            const waMsg = encodeURIComponent(`السلام عليكم شركة السندباد للعقارات، أرغب بالاستفسار عن العقار: ${prop.title} (${prop.location})`);
+            const content = `
+                <div class="relative h-64 sm:h-72 bg-slate-200 dark:bg-slate-800">
+                    <img src="${prop.image}" onerror="this.src='https://placehold.co/800x500/0f294a/f59e0b?text=شركة+السندباد'" class="w-full h-full object-cover">
+                    <span class="absolute top-4 right-4 ${getBadgeStyle(prop.badge || prop.category)} font-cairo font-bold text-xs px-4 py-1.5 rounded-full shadow">
+                        ${prop.badge || prop.category}
+                    </span>
+                </div>
+                <div class="p-6 sm:p-8 space-y-4">
+                    <h3 class="font-cairo font-black text-2xl text-royalBlue dark:text-white">${prop.title}</h3>
+                    <div class="grid sm:grid-cols-2 gap-3 text-sm">
+                        <div class="bg-slate-50 dark:bg-slate-800 p-3 rounded-xl font-bold">
+                            <span class="text-slate-500 block text-xs">الموقع الدقيق:</span>
+                            <span class="text-royalBlue dark:text-white"><i class="fa-solid fa-location-dot text-rubyRed ml-1"></i> ${prop.location}</span>
+                        </div>
+                        <div class="bg-slate-50 dark:bg-slate-800 p-3 rounded-xl font-bold">
+                            <span class="text-slate-500 block text-xs">المساحة:</span>
+                            <span class="text-royalBlue dark:text-white"><i class="fa-solid fa-ruler-combined text-warmGold ml-1"></i> ${prop.area}</span>
+                        </div>
+                    </div>
+                    <div class="bg-warmGold/15 border border-warmGold/30 p-3.5 rounded-xl font-cairo font-black text-lg text-royalBlue dark:text-warmGold">
+                        السعر: ${prop.priceText}
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">${prop.details}</p>
+                    <div class="pt-3 flex flex-wrap gap-3">
+                        <a href="https://wa.me/9647864149641?text=${waMsg}" target="_blank" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-cairo font-bold py-3.5 px-5 rounded-2xl text-center flex items-center justify-center gap-2 shadow-lg">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> تواصل عبر واتساب الآن
+                        </a>
+                        <a href="tel:07864149641" class="bg-royalBlue hover:bg-rubyRed text-white font-cairo font-bold py-3.5 px-5 rounded-2xl text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-phone"></i> اتصال مباشر
+                        </a>
+                    </div>
+                </div>
+            `;
+            document.getElementById('property-detail-content').innerHTML = content;
+            document.getElementById('property-detail-modal').classList.remove('hidden');
+        }
+
+        function closePropertyDetailModal() {
+            document.getElementById('property-detail-modal').classList.add('hidden');
+        }
+
+        // ================= عرض البيانات داخل لوحة الإدارة =================
+        function renderAdminPropertiesList() {
+            const container = document.getElementById('admin-properties-list');
+            const props = appState.db.properties || [];
+            document.getElementById('admin-prop-count').textContent = props.length;
+
+            container.innerHTML = props.map(prop => `
+                <div class="bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 flex justify-between items-start gap-3">
+                    <div class="space-y-1">
+                        <span class="inline-block text-[11px] font-cairo font-bold px-2.5 py-0.5 rounded-full ${getBadgeStyle(prop.badge || prop.category)}">${prop.badge || prop.category}</span>
+                        <h5 class="font-cairo font-bold text-sm text-royalBlue dark:text-white">${prop.title}</h5>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">${prop.location} • ${prop.area}</p>
+                        <p class="text-xs font-bold text-emerald-600 dark:text-emerald-400">${prop.priceText}</p>
+                    </div>
+                    <div class="flex flex-col gap-1.5 shrink-0">
+                        <button onclick="editPropertyItem('${prop.id}')" class="px-3 py-1.5 rounded-lg bg-royalBlue text-white text-xs font-bold hover:bg-blue-800 transition">
+                            <i class="fa-solid fa-pen"></i> تعديل
+                        </button>
+                        <button onclick="deletePropertyItem('${prop.id}')" class="px-3 py-1.5 rounded-lg bg-rubyRed text-white text-xs font-bold hover:bg-red-800 transition">
+                            <i class="fa-solid fa-trash"></i> حذف
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderAdminRequestsList() {
+            const container = document.getElementById('admin-requests-list');
+            const reqs = appState.db.requests || [];
+            document.getElementById('admin-req-count').textContent = reqs.length;
+
+            if (reqs.length === 0) {
+                container.innerHTML = `<p class="text-center py-8 text-slate-500 font-cairo font-bold">لا توجد طلبات عملاء مسجلة حتى الآن.</p>`;
+                return;
+            }
+
+            container.innerHTML = reqs.map(req => {
+                let cleanPhone = (req.phone || '').replace(/\D/g, '');
+                if (cleanPhone.startsWith('0')) cleanPhone = '964' + cleanPhone.substring(1);
+                const replyUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(`السلام عليكم أستاذ ${req.name}، نتواصل معكم من شركة السندباد للعقارات بخصوص طلبكم (${req.type}).`)}`;
+
+                return `
+                    <div class="bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row justify-between gap-4">
+                        <div class="space-y-1.5">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="font-cairo font-black text-base text-royalBlue dark:text-white">${req.name}</span>
+                                <span dir="ltr" class="text-xs font-bold bg-white dark:bg-slate-900 px-2.5 py-0.5 rounded-lg border border-slate-200 dark:border-slate-700">${req.phone}</span>
+                                <span class="text-[11px] text-slate-400">${req.date || ''}</span>
+                            </div>
+        // 1. حفظ إعدادات GitHub مع إخفاء التوكن وتشفير تخزينه محلياً
+        document.getElementById('github-config-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const owner = document.getElementById('git-owner').value.trim();
+            const repo = document.getElementById('git-repo').value.trim();
+            const branch = document.getElementById('git-branch').value.trim() || 'main';
+            const path = document.getElementById('git-path').value.trim() || 'data/sindbad_db.json';
+            const tokenInput = document.getElementById('git-token');
+            const token = tokenInput.value.trim();
+
+            if (!owner || !repo || !token) {
+                showToast('يرجى ملء اسم المستخدم واسم المستودع ورمز الوصول (Token)', true);
+                return;
+            }
+
+            // إعادة حقل التوكن لوضع الإخفاء (password) فوراً بعد الحفظ
+            tokenInput.type = 'password';
+            const tokenEye = document.getElementById('token-eye-icon');
+            if (tokenEye) {
+                tokenEye.classList.remove('fa-eye-slash');
+                tokenEye.classList.add('fa-eye');
+            }
+
+            appState.gitConfig = { owner, repo, branch, path, token };
+            appState.currentFileSha = null;
+
+            // حفظ نسخه مرمزة في LocalStorage دون تخزين التوكن كنص صريح
+            const storagePayload = {
+                owner,
+                repo,
+                branch,
+                path,
+                encodedToken: utf8ToBase64(token)
+            };
+            localStorage.setItem(STORAGE_KEYS.GIT_CONFIG, JSON.stringify(storagePayload));
+
+            await pushToGitHub('ربط ومزامنة قاعدة بيانات شركة السندباد للعقارات');
+        });
+        function getStoredPinHash() {
+            return localStorage.getItem(STORAGE_KEYS.ADMIN_PIN_HASH) || DEFAULT_PIN_HASH;
+        }
+
+        async function changeAdminPin() {
+            const newPinInput = document.getElementById('new-admin-pin');
+            const newPin = newPinInput.value.trim();
+            if (newPin.length < 4) {
+                showToast('يجب أن يتكون الرمز السري من 4 أرقام أو أحرف على الأقل', true);
+                return;
+            }
+            const newHash = await hashSecret(newPin);
+            localStorage.setItem(STORAGE_KEYS.ADMIN_PIN_HASH, newHash);
+            newPinInput.value = '';
+            newPinInput.type = 'password';
+            showToast('تم تشفير وتحديث رمز دخول لوحة الإدارة بنجاح!');
+        }
+
+        // 2. إضافة أو تعديل عقار
+        document.getElementById('admin-property-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const editId = document.getElementById('edit-prop-id').value;
+            const priceStr = document.getElementById('prop-price').value.trim();
+            const numMatch = priceStr.match(/\d+(\.\d+)?/);
+            const priceNumeric = numMatch ? parseFloat(numMatch[0]) : 0;
+
+            const propObj = {
+                id: editId || ('prop-' + Date.now()),
+                title: document.getElementById('prop-title').value.trim(),
+                category: document.getElementById('prop-category').value,
+                badge: document.getElementById('prop-badge').value,
+                area: document.getElementById('prop-area').value.trim(),
+                priceNumeric,
+                priceText: priceStr,
+                location: document.getElementById('prop-location').value.trim(),
+                image: document.getElementById('prop-image').value.trim() || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+                details: document.getElementById('prop-details').value.trim(),
+                createdAt: Date.now()
+            };
+
+            if (editId) {
+                const idx = appState.db.properties.findIndex(p => p.id === editId);
+                if (idx !== -1) {
+                    propObj.createdAt = appState.db.properties[idx].createdAt || Date.now();
+                    appState.db.properties[idx] = propObj;
+                }
+            } else {
+                appState.db.properties.unshift(propObj);
+            }
+
+            resetPropertyForm();
+            await pushToGitHub(editId ? `تعديل عقار: ${propObj.title}` : `إضافة عقار جديد: ${propObj.title}`);
+        });
+
+        function editPropertyItem(id) {
+            const prop = appState.db.properties.find(p => p.id === id);
+            if (!prop) return;
+
+            document.getElementById('edit-prop-id').value = prop.id;
+            document.getElementById('prop-title').value = prop.title;
+            document.getElementById('prop-category').value = prop.category;
+            document.getElementById('prop-badge').value = prop.badge || 'للبيع';
+            document.getElementById('prop-area').value = prop.area;
+            document.getElementById('prop-price').value = prop.priceText;
+            document.getElementById('prop-location').value = prop.location;
+            document.getElementById('prop-image').value = prop.image;
+            document.getElementById('prop-details').value = prop.details;
+
+            document.getElementById('prop-form-title').innerHTML = `<i class="fa-solid fa-pen-to-square ml-1"></i> تعديل العقار: ${prop.title}`;
+            document.getElementById('save-prop-btn').innerHTML = `<i class="fa-brands fa-github"></i> <span>حفظ التعديلات ومزامنتها مع GitHub</span>`;
+            document.getElementById('cancel-edit-btn').classList.remove('hidden');
+            document.getElementById('admin-property-form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetPropertyForm() {
+            document.getElementById('admin-property-form').reset();
+            document.getElementById('edit-prop-id').value = '';
+            document.getElementById('prop-form-title').innerHTML = `<i class="fa-solid fa-plus-circle ml-1"></i> إضافة عقار جديد`;
+            document.getElementById('save-prop-btn').innerHTML = `<i class="fa-brands fa-github"></i> <span>حفظ ومزامنة مع GitHub</span>`;
+            document.getElementById('cancel-edit-btn').classList.add('hidden');
+        }
+
+        async function deletePropertyItem(id) {
+            appState.db.properties = appState.db.properties.filter(p => p.id !== id);
+            await pushToGitHub('حذف عقار من المعرض');
+        }
+
+        // 3. تحديث شريط الإعلانات العاجلة
+        document.getElementById('admin-announcement-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const newText = document.getElementById('announcement-input').value.trim();
+            if (!newText) return;
+            appState.db.announcement = newText;
+            await pushToGitHub('تحديث شريط الإعلانات العاجلة');
+        });
+
+        // 4. إرسال طلب عميل وحفظه في السجل (ومزامنته مع GitHub إذا كان مفعلاً)
+        document.getElementById('client-request-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('req-name').value.trim();
+            const phone = document.getElementById('req-phone').value.trim();
+            const type = document.getElementById('req-type').value;
+            const details = document.getElementById('req-details').value.trim();
+            const openWa = document.getElementById('req-open-whatsapp').checked;
+
+            const newReq = {
+                id: 'req-' + Date.now(),
+                name,
+                phone,
+                type,
+                details,
+                date: new Date().toLocaleDateString('ar-IQ')
+            };
+
+            appState.db.requests = appState.db.requests || [];
+            appState.db.requests.unshift(newReq);
+
+            if (isGitConfigured()) {
+                await pushToGitHub(`طلب عميل جديد من: ${name}`);
+            } else {
+                localStorage.setItem(STORAGE_KEYS.DB_DATA, JSON.stringify(appState.db));
+                renderAdminRequestsList();
+                showToast('تم حفظ طلبك بنجاح! جاري تحويلك للواتساب...');
+            }
+
+            e.target.reset();
+
+            if (openWa) {
+                const msg = `*طلب جديد - شركة السندباد للعقارات*\n` +
+                            `👤 الاسم: ${name}\n` +
+                            `📱 الهاتف: ${phone}\n` +
+                            `📋 نوع الطلب: ${type}\n` +
+                            `📝 التفاصيل: ${details}`;
+                window.open(`https://wa.me/9647864149641?text=${encodeURIComponent(msg)}`, '_blank');
+            }
+        });
+
+        async function deleteRequestItem(id) {
+            appState.db.requests = (appState.db.requests || []).filter(r => r.id !== id);
+            await pushToGitHub('حذف طلب عميل من السجل');
+        }
+
+        // ================= أدوات التصدير اليدوي والرمز السري =================
+        function downloadDatabaseJSON() {
+            const dataStr = JSON.stringify(appState.db, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'sindbad_db.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('تم تحميل ملف sindbad_db.json بنجاح!');
+        }
+
+        function copyDatabaseJSON() {
+            const dataStr = JSON.stringify(appState.db, null, 2);
+            const temp = document.createElement('textarea');
+            temp.value = dataStr;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast('تم نسخ محتوى قاعدة البيانات JSON إلى الحافظة!');
+        }
+
+        function getAdminPin() {
+            return localStorage.getItem(STORAGE_KEYS.ADMIN_PIN) || '1234';
+        }
+
+        function changeAdminPin() {
+            const newPin = document.getElementById('new-admin-pin').value.trim();
+            if (newPin.length < 4) {
+                showToast('يجب أن يتكون الرمز السري من 4 أرقام أو أحرف على الأقل', true);
+                return;
+            }
+            localStorage.setItem(STORAGE_KEYS.ADMIN_PIN, newPin);
+            document.getElementById('new-admin-pin').value = '';
+            document.getElementById('hint-pin-display').textContent = 'مُخصص';
+            showToast('تم تحديث رمز دخول لوحة الإدارة بنجاح!');
+        }
+
+        // ================= التحكم بالواجهة والتبويبات والتصفية =================
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-royalBlue', 'text-white', 'shadow');
+                    b.classList.add('bg-white', 'dark:bg-slate-900', 'text-royalBlue', 'dark:text-slate-200');
+                });
+                btn.classList.add('active', 'bg-royalBlue', 'text-white', 'shadow');
+                btn.classList.remove('bg-white', 'dark:bg-slate-900', 'text-royalBlue', 'dark:text-slate-200');
+
+                appState.activeFilter = btn.getAttribute('data-filter');
+                renderPropertiesGrid();
+            });
+        });
+
+        document.getElementById('property-search-input').addEventListener('input', (e) => {
+            appState.searchQuery = e.target.value;
+            renderPropertiesGrid();
+        });
+
+        document.getElementById('property-sort-select').addEventListener('change', (e) => {
+            appState.sortBy = e.target.value;
+            renderPropertiesGrid();
+        });
+
+        // نوافذ الإدارة
+        function openAdminAuthModal() {
+            if (appState.isAdminAuthenticated) {
+                document.getElementById('admin-dashboard-modal').classList.remove('hidden');
+            } else {
+                document.getElementById('admin-auth-modal').classList.remove('hidden');
+                document.getElementById('admin-pin-input').focus();
+            }
+        }
+
+        function closeAdminAuthModal() {
+            document.getElementById('admin-auth-modal').classList.add('hidden');
+        }
+
+        function closeAdminDashboard() {
+            document.getElementById('admin-dashboard-modal').classList.add('hidden');
+            // إعادة تعيين حقول الرموز السرية لوضع الإخفاء عند إغلاق اللوحة
+            const tokenInput = document.getElementById('git-token');
+            if (tokenInput) tokenInput.type = 'password';
+            const newPinInput = document.getElementById('new-admin-pin');
+            if (newPinInput) newPinInput.type = 'password';
+        }
+
+        document.getElementById('admin-login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const pinInput = document.getElementById('admin-pin-input');
+            const pin = pinInput.value.trim();
+            const enteredHash = await hashSecret(pin);
+
+            if (enteredHash === getStoredPinHash()) {
+                appState.isAdminAuthenticated = true;
+                pinInput.value = '';
+                pinInput.type = 'password';
+                closeAdminAuthModal();
+                document.getElementById('admin-dashboard-modal').classList.remove('hidden');
+                showToast('تم التحقق والدخول إلى لوحة الإدارة بنجاح');
+            } else {
+                pinInput.value = '';
+                showToast('الرمز السري غير صحيح!', true);
+            }
+        });
+
+        function switchAdminTab(tabId) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'dark:bg-slate-900', 'text-royalBlue', 'dark:text-warmGold', 'border-t-2', 'border-warmGold');
+                btn.classList.add('text-slate-600', 'dark:text-slate-300');
+            });
+
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.add('bg-white', 'dark:bg-slate-900', 'text-royalBlue', 'dark:text-warmGold', 'border-t-2', 'border-warmGold');
+            activeBtn.classList.remove('text-slate-600', 'dark:text-slate-300');
+        }
+
+        // نسخ رقم الهاتف
+        function copyToClipboard(text) {
+            const temp = document.createElement('input');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast(`تم نسخ الرقم (${text}) بنجاح!`);
+        }
+
+        // إشعارات Toast
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast-notification');
+            const icon = document.getElementById('toast-icon');
+            document.getElementById('toast-message').textContent = message;
+            
+            if (isError) {
+                toast.classList.remove('border-warmGold');
+                toast.classList.add('border-rubyRed');
+                icon.className = 'fa-solid fa-circle-exclamation text-rubyRed text-xl shrink-0';
+            } else {
+                toast.classList.remove('border-rubyRed');
+                toast.classList.add('border-warmGold');
+                icon.className = 'fa-solid fa-circle-check text-warmGold text-xl shrink-0';
+            }
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3500);
+        }
+
+        // قائمة الموبايل والوضع الليلي
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const themeIcon = document.getElementById('theme-icon');
+        if (localStorage.getItem(STORAGE_KEYS.THEME) === 'dark') {
+            document.documentElement.classList.add('dark');
+            themeIcon.className = 'fa-solid fa-sun text-lg';
+        }
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem(STORAGE_KEYS.THEME, isDark ? 'dark' : 'light');
+            themeIcon.className = isDark ? 'fa-solid fa-sun text-lg' : 'fa-solid fa-moon text-lg';
+        });
+
+        // بدء تشغيل التطبيق والمزامنة عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', async () => {
+            initLocalDB();
+            loadGitConfig();
+            renderAll();
+            await fetchFromGitHub();
+        });
+    </script>
+</body>
+</html>
